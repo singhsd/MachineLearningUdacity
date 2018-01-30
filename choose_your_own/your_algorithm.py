@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from prep_terrain_data import makeTerrainData
-#from class_vis import prettyPicture
+from class_vis import prettyPicture
 
 features_train, labels_train, features_test, labels_test = makeTerrainData()
 
-'''
+
 ### the training data (features_train, labels_train) have both "fast" and "slow"
 ### points mixed together--separate them so we can give them different colors
 ### in the scatterplot and identify them visually
@@ -26,7 +26,7 @@ plt.xlabel("bumpiness")
 plt.ylabel("grade")
 plt.show()
 ################################################################################
-'''
+ 
 
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
@@ -55,9 +55,9 @@ for neighbors in range(1,11):
 			print(neighbors,weights,algorithm,"accuracy: ",acc)
 
 
-'''
+ 
 try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
     pass
-'''
+ 
