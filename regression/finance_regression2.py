@@ -1,3 +1,6 @@
+# finance regression using long term incentives
+
+
 #!/usr/bin/python
 
 """
@@ -21,7 +24,7 @@ dictionary = pickle.load( open("../final_project/final_project_dataset_modified.
 
 ### list the features you want to look at--first item in the 
 ### list will be the "target" feature
-features_list = ["bonus", "salary"]
+features_list = ["bonus", "long_term_incentive"]
 data = featureFormat( dictionary, features_list, remove_any_zeroes=True)
 target, features = targetFeatureSplit( data )
 
@@ -71,10 +74,6 @@ try:
     plt.plot( feature_test, reg.predict(feature_test) )
 except NameError:
     pass
-
-reg.fit(feature_test, target_test)
-print "Slope: ", reg.coef_
-plt.plot(feature_train, reg.predict(feature_train), color="b") 
 
 
 plt.xlabel(features_list[1])
