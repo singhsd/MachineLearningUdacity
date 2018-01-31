@@ -42,14 +42,44 @@ def Draw(pred, features, poi, mark_poi=False, name="image.png", f1_name="feature
 data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r") )
 ### there's an outlier--remove it! 
 data_dict.pop("TOTAL", 0)
+######################
+mn=1000000000
+mx=0
 
+for i in data_dict:
+	if (data_dict[i]['exercised_stock_options']!='NaN'):
+		if(data_dict[i]['exercised_stock_options']>mx): mx=data_dict[i]['exercised_stock_options']
+		if(data_dict[i]['exercised_stock_options']<mn): mn=data_dict[i]['exercised_stock_options']
 
+print "for feature exercised stock options: "
+print "maximum value: ",mx," and minimum value: ",mn
+######################
+mn=1000000000
+mx=0
+
+for i in data_dict:
+	if (data_dict[i]['salary']!='NaN'):
+		if(data_dict[i]['salary']>mx): mx=data_dict[i]['salary']
+		if(data_dict[i]['salary']<mn): mn=data_dict[i]['salary']
+
+print "for feature salary: "
+print "maximum value: ",mx," and minimum value: ",mn
+######################
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
 feature_1 = "salary"
 feature_2 = "exercised_stock_options"
 poi  = "poi"
+
+''' 
+#use for 3 features
+
+feature_3 = "total_payments"
+features_list = [poi, feature_1, feature_2, feature_3]
+'''
+#for 2 features
 features_list = [poi, feature_1, feature_2]
+
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
 
@@ -65,7 +95,10 @@ plt.show()
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
 
-
+from sklearn.cluster import KMeans
+kmeans=KMeans(n_clusters=2)
+kmeans.fit(finance_features)
+pred=kmeans.predict(finance_features)
 
 
 ### rename the "name" parameter when you change the number of features
