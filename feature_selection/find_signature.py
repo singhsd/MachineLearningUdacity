@@ -39,5 +39,26 @@ labels_train   = labels_train[:150]
 
 ### your code goes here
 
+from time import time
+from sklearn import tree
+from sklearn.metrics import accuracy_score
+
+clf=tree.DecisionTreeClassifier()
+t0=time()
+clf.fit(features_train,labels_train)
+print("training time: ",round(time()-t0,3),"s")
+t0=time()
+pred=clf.predict(features_test)
+
+print("Prediction time: ",round(time()-t0,3),"s")
+acc=accuracy_score(pred,labels_test)
+
+print "No. of training points: ",len(features_train)
+print "accuracy on test set: ", acc
+
+# should be 0.948236632537 according to the course, but multiple code versions and dependencies on earlier modified files alter the conditions
 
 
+for counter, imp in enumerate(clf.feature_importances_):
+	if imp>0.2:
+		print "Counter and importance : ", counter,imp,vectorizer.get_feature_names()[counter]
