@@ -2,16 +2,11 @@
 ===================================================
 Faces recognition example using eigenfaces and SVMs
 ===================================================
-
 The dataset used in this example is a preprocessed excerpt of the
 "Labeled Faces in the Wild", aka LFW_:
-
   http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz (233MB)
-
   .. _LFW: http://vis-www.cs.umass.edu/lfw/
-
   original source: http://scikit-learn.org/stable/auto_examples/applications/face_recognition.html
-
 """
 
 
@@ -66,7 +61,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 ###############################################################################
 # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
 # dataset): unsupervised feature extraction / dimensionality reduction
-n_components = 150
+n_components = 100
+
 
 print "Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0])
 t0 = time()
@@ -144,3 +140,6 @@ eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
 plot_gallery(eigenfaces, eigenface_titles, h, w)
 
 pl.show()
+
+print 'Variance of First Component: ', pca.explained_variance_ratio_[0]
+print 'Variance of Second Component: ', pca.explained_variance_ratio_[1]
